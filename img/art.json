@@ -1,0 +1,218 @@
+{
+ "hero": {
+  "file": "Christ The Consolator.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Christ_The_Consolator.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "artist": "Carl Heinrich Bloch (1834-1890)",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Christ_The_Consolator.jpg",
+  "caption": "Carl Bloch, Christus Consolator",
+  "path": "img/hero.jpg"
+ },
+ "01": {
+  "file": "Paradise Lost 9.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Paradise_Lost_9.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "artist": "Gustave Dor\u00e9",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Paradise_Lost_9.jpg",
+  "caption": "Gustave Dor\u00e9, The Fall of Lucifer, from Paradise Lost",
+  "path": "img/01.jpg"
+ },
+ "02": {
+  "file": "Ofiara Abrahama1.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Ofiara_Abrahama1.jpg/1920px-Ofiara_Abrahama1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Rembrandt and workshop",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Ofiara_Abrahama1.jpg",
+  "caption": "Rembrandt, The Sacrifice of Isaac",
+  "path": "img/02.jpg"
+ },
+ "03": {
+  "file": "120.The Prophet Isaiah.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/120.The_Prophet_Isaiah.jpg/1920px-120.The_Prophet_Isaiah.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Gustave Dor\u00e9",
+  "descurl": "https://commons.wikimedia.org/wiki/File:120.The_Prophet_Isaiah.jpg",
+  "caption": "Gustave Dor\u00e9, The Prophet Isaiah",
+  "path": "img/03.jpg"
+ },
+ "06": {
+  "file": "The Annunciation, Philadelphia Museum of Art, W1899-1-1-pma, by Henry Ossawa Tanner.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/The_Annunciation%2C_Philadelphia_Museum_of_Art%2C_W1899-1-1-pma%2C_by_Henry_Ossawa_Tanner.jpg/1920px-The_Annunciation%2C_Philadelphia_Museum_of_Art%2C_W1899-1-1-pma%2C_by_Henry_Ossawa_Tanner.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Henry Ossawa Tanner",
+  "descurl": "https://commons.wikimedia.org/wiki/File:The_Annunciation,_Philadelphia_Museum_of_Art,_W1899-1-1-pma,_by_Henry_Ossawa_Tanner.jpg",
+  "caption": "Henry Ossawa Tanner, The Annunciation",
+  "path": "img/06.jpg"
+ },
+ "08": {
+  "file": "The Evangelist Matthew Inspired by an Angel.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/The_Evangelist_Matthew_Inspired_by_an_Angel.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "artist": "Rembrandt",
+  "descurl": "https://commons.wikimedia.org/wiki/File:The_Evangelist_Matthew_Inspired_by_an_Angel.jpg",
+  "caption": "Rembrandt, The Evangelist Matthew Inspired by an Angel",
+  "path": "img/08.jpg"
+ },
+ "09": {
+  "file": "Jesus Is Found in the Temple, Carl Blonch.jpeg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Jesus_Is_Found_in_the_Temple%2C_Carl_Blonch.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "artist": "Carl Bloch",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Jesus_Is_Found_in_the_Temple,_Carl_Blonch.jpeg",
+  "caption": "Carl Bloch, Jesus Found in the Temple",
+  "path": "img/09.jpg"
+ },
+ "10": {
+  "file": "Verrocchio and Leonardo, Baptism of Christ, c1470-75, Uffizi.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Verrocchio_and_Leonardo%2C_Baptism_of_Christ%2C_c1470-75%2C_Uffizi.jpg/1920px-Verrocchio_and_Leonardo%2C_Baptism_of_Christ%2C_c1470-75%2C_Uffizi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Andrea del Verrocchio / Leonardo da Vinci",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Verrocchio_and_Leonardo,_Baptism_of_Christ,_c1470-75,_Uffizi.jpg",
+  "caption": "Verrocchio and Leonardo, The Baptism of Christ",
+  "path": "img/10.jpg"
+ },
+ "11": {
+  "file": "Raphael - The Miraculous Draft of Fishes - Google Art Project.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Raphael_-_The_Miraculous_Draft_of_Fishes_-_Google_Art_Project.jpg/1920px-Raphael_-_The_Miraculous_Draft_of_Fishes_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Raphael",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Raphael_-_The_Miraculous_Draft_of_Fishes_-_Google_Art_Project.jpg",
+  "caption": "Raphael, The Miraculous Draught of Fishes",
+  "path": "img/11.jpg"
+ },
+ "12": {
+  "file": "TissotBeatitudes.JPG",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/TissotBeatitudes.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "artist": "James Tissot",
+  "descurl": "https://commons.wikimedia.org/wiki/File:TissotBeatitudes.JPG",
+  "caption": "James Tissot, The Sermon of the Beatitudes",
+  "path": "img/12.jpg"
+ },
+ "14": {
+  "file": "Rembrandt Harmensz van Rijn - Return of the Prodigal Son - Google Art Project.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Rembrandt_Harmensz_van_Rijn_-_Return_of_the_Prodigal_Son_-_Google_Art_Project.jpg/1920px-Rembrandt_Harmensz_van_Rijn_-_Return_of_the_Prodigal_Son_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Rembrandt",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Rembrandt_Harmensz_van_Rijn_-_Return_of_the_Prodigal_Son_-_Google_Art_Project.jpg",
+  "caption": "Rembrandt, The Return of the Prodigal Son",
+  "path": "img/14.jpg"
+ },
+ "16": {
+  "file": "Transfiguration bloch.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Transfiguration_bloch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "artist": "Carl Bloch",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Transfiguration_bloch.jpg",
+  "caption": "Carl Bloch, The Transfiguration",
+  "path": "img/16.jpg"
+ },
+ "18": {
+  "file": "Leonardo da Vinci (1452-1519) - The Last Supper (1495-1498).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Leonardo_da_Vinci_%281452-1519%29_-_The_Last_Supper_%281495-1498%29.jpg/1920px-Leonardo_da_Vinci_%281452-1519%29_-_The_Last_Supper_%281495-1498%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Leonardo da Vinci",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Leonardo_da_Vinci_(1452-1519)_-_The_Last_Supper_(1495-1498).jpg",
+  "caption": "Leonardo da Vinci, The Last Supper",
+  "path": "img/18.jpg"
+ },
+ "19": {
+  "file": "Gethsemane Carl Bloch.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Gethsemane_Carl_Bloch.jpg/1920px-Gethsemane_Carl_Bloch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Carl Bloch",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Gethsemane_Carl_Bloch.jpg",
+  "caption": "Carl Bloch, Christ in Gethsemane",
+  "path": "img/19.jpg"
+ },
+ "20": {
+  "file": "Supper at Emmaus-Caravaggio (1601).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Supper_at_Emmaus-Caravaggio_%281601%29.jpg/1920px-Supper_at_Emmaus-Caravaggio_%281601%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Caravaggio",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Supper_at_Emmaus-Caravaggio_(1601).jpg",
+  "caption": "Caravaggio, The Supper at Emmaus",
+  "path": "img/20.jpg"
+ },
+ "22": {
+  "file": "The Lord is my Good Shepherd.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/The_Lord_is_my_Good_Shepherd.jpg/1920px-The_Lord_is_my_Good_Shepherd.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Bernhard Plockhorst",
+  "descurl": "https://commons.wikimedia.org/wiki/File:The_Lord_is_my_Good_Shepherd.jpg",
+  "caption": "Bernhard Plockhorst, The Good Shepherd",
+  "path": "img/22.jpg"
+ },
+ "23": {
+  "file": "Rembrandt The Ascension 1636 Oil on canvas Alte Pinakothek Munich Germany.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Rembrandt_The_Ascension_1636_Oil_on_canvas_Alte_Pinakothek_Munich_Germany.jpg/1920px-Rembrandt_The_Ascension_1636_Oil_on_canvas_Alte_Pinakothek_Munich_Germany.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Rembrandt",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Rembrandt_The_Ascension_1636_Oil_on_canvas_Alte_Pinakothek_Munich_Germany.jpg",
+  "caption": "Rembrandt, The Ascension of Christ",
+  "path": "img/23.jpg"
+ },
+ "04": {
+  "file": "127.Ezekiel\u2019s Vision of the Valley of Dry Bones.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/127.Ezekiel%E2%80%99s_Vision_of_the_Valley_of_Dry_Bones.jpg/1920px-127.Ezekiel%E2%80%99s_Vision_of_the_Valley_of_Dry_Bones.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Gustave Dor\u00e9",
+  "descurl": "https://commons.wikimedia.org/wiki/File:127.Ezekiel%E2%80%99s_Vision_of_the_Valley_of_Dry_Bones.jpg",
+  "caption": "Gustave Dor\u00e9, The Vision of the Valley of Dry Bones",
+  "path": "img/04.jpg"
+ },
+ "07": {
+  "file": "Rembrandt van Rijn, The Adoration of the Shepherds - with the Lamp, c. 1654, NGA 43411.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Rembrandt_van_Rijn%2C_The_Adoration_of_the_Shepherds_-_with_the_Lamp%2C_c._1654%2C_NGA_43411.jpg/1920px-Rembrandt_van_Rijn%2C_The_Adoration_of_the_Shepherds_-_with_the_Lamp%2C_c._1654%2C_NGA_43411.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "CC0",
+  "artist": "Rembrandt van Rijn",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Rembrandt_van_Rijn,_The_Adoration_of_the_Shepherds_-_with_the_Lamp,_c._1654,_NGA_43411.jpg",
+  "caption": "Rembrandt, The Adoration of the Shepherds",
+  "path": "img/07.jpg"
+ },
+ "17": {
+  "file": "Rembrandt Harmensz. van Rijn - The Raising of Lazarus - Google Art Project.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rembrandt_Harmensz._van_Rijn_-_The_Raising_of_Lazarus_-_Google_Art_Project.jpg/1920px-Rembrandt_Harmensz._van_Rijn_-_The_Raising_of_Lazarus_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Rembrandt",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Rembrandt_Harmensz._van_Rijn_-_The_Raising_of_Lazarus_-_Google_Art_Project.jpg",
+  "caption": "Rembrandt, The Raising of Lazarus",
+  "path": "img/17.jpg"
+ },
+ "21": {
+  "file": "Rembrandt, The Apostle Paul, 1659, The National Gallery, London.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Rembrandt%2C_The_Apostle_Paul%2C_1659%2C_The_National_Gallery%2C_London.jpg/1920px-Rembrandt%2C_The_Apostle_Paul%2C_1659%2C_The_National_Gallery%2C_London.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Rembrandt",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Rembrandt,_The_Apostle_Paul,_1659,_The_National_Gallery,_London.jpg",
+  "caption": "Rembrandt, The Apostle Paul",
+  "path": "img/21.jpg"
+ },
+ "05": {
+  "file": "Pieter Bruegel the Elder - The Sermon of Saint John the Baptist (1566) - Sz\u00e9pm\u0171v\u00e9szeti M\u00fazeum.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pieter_Bruegel_the_Elder_-_The_Sermon_of_Saint_John_the_Baptist_%281566%29_-_Sz%C3%A9pm%C5%B1v%C3%A9szeti_M%C3%BAzeum.jpg/1920px-Pieter_Bruegel_the_Elder_-_The_Sermon_of_Saint_John_the_Baptist_%281566%29_-_Sz%C3%A9pm%C5%B1v%C3%A9szeti_M%C3%BAzeum.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Pieter Brueghel the Elder",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Pieter_Bruegel_the_Elder_-_The_Sermon_of_Saint_John_the_Baptist_(1566)_-_Sz%C3%A9pm%C5%B1v%C3%A9szeti_M%C3%BAzeum.jpg",
+  "caption": "Pieter Bruegel the Elder, The Sermon of Saint John the Baptist",
+  "path": "img/05.jpg"
+ },
+ "13": {
+  "file": "Jean-Fran\u00e7ois Millet - The Sower - Google Art Project.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg/1920px-Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "Public domain",
+  "artist": "Jean-Fran\u00e7ois Millet",
+  "descurl": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Millet_-_The_Sower_-_Google_Art_Project.jpg",
+  "caption": "Jean-Fran\u00e7ois Millet, The Sower",
+  "path": "img/13.jpg"
+ },
+ "15": {
+  "file": "The Miracle of the Loaves and Fishes MET DT5476.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/The_Miracle_of_the_Loaves_and_Fishes_MET_DT5476.jpg/1920px-The_Miracle_of_the_Loaves_and_Fishes_MET_DT5476.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "license": "CC0",
+  "artist": "Jacopo Tintoretto",
+  "descurl": "https://commons.wikimedia.org/wiki/File:The_Miracle_of_the_Loaves_and_Fishes_MET_DT5476.jpg",
+  "caption": "Tintoretto, The Miracle of the Loaves and Fishes",
+  "path": "img/15.jpg"
+ }
+}

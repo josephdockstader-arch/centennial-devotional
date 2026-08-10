@@ -275,6 +275,40 @@ p { margin: 0 0 1.1rem; }
   color: var(--ink-soft);
 }
 
+/* ---------------------------------------------------------- artwork */
+
+.plate { margin: 2.4rem 0 2.2rem; }
+.plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  background: var(--paper-warm);
+}
+.plate figcaption {
+  margin-top: 0.6rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+.plate .pd {
+  flex: none;
+  font-size: 0.62rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.heroplate { max-width: 52rem; margin: 0 auto; padding: 2.4rem 0 0; }
+.heroplate .plate { margin: 0; }
+.heroplate .plate img { border: 0; }
+
 ol.talks { list-style: none; margin: 0; padding: 0; counter-reset: talk; }
 ol.talks li {
   counter-increment: talk;
