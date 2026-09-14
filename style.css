@@ -499,3 +499,37 @@ table.sched td .sub { display: block; font-size: 0.85em; color: #777; font-style
 table.sched tr.term td { padding-top: 1.1rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #4d565c; border-bottom: 2px solid #d9d0bd; }
 table.sched a { text-decoration: none; color: inherit; font-weight: 600; }
 table.sched a:hover { color: #b0872f; }
+
+/* --- 2026-09-14 usability pass (external visual review) --- */
+
+/* header text links (hidden on narrow screens; dropdown covers them) */
+.toplinks { display: flex; gap: 1.3rem; font-family: var(--sans); }
+.toplinks a { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); text-decoration: none; padding: 0.4rem 0; }
+.toplinks a:hover { color: var(--gold); }
+@media (max-width: 640px) { .toplinks { display: none; } }
+
+/* dropdown: program links as a compact full-width row above the terms */
+.navprogram { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; padding-bottom: 0.7rem; margin-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+.navprogram a { font-family: var(--sans); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); text-decoration: none; padding: 0.2rem 0; white-space: nowrap; }
+.navprogram a:hover, .navprogram a.here { color: var(--gold); }
+
+/* homepage shortcuts under the title */
+.hero-actions { margin: 1.9rem 0 0.2rem; display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+.hero-actions a { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.65rem 1.3rem; border-radius: 3px; }
+.hero-actions .btn-solid, a.btn-solid { background: var(--green); color: var(--paper); }
+.hero-actions .btn-solid:hover { background: var(--green-deep); }
+.hero-actions .btn-ghost, a.btn-ghost { border: 1px solid var(--green); color: var(--green); }
+.hero-actions .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* cohort page at-a-glance row */
+.glance { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); margin: 1rem 0 0.4rem; }
+.glance .gdate { font-weight: 700; color: #7a5d1d; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; }
+.glance a { color: var(--green); font-weight: 600; }
+.glance a:hover { color: var(--gold); }
+
+/* small supporting text, slightly stronger */
+.cohort .meta { font-size: 0.74rem; color: #7a5d1d; }
+.cnum { font-size: 0.72rem; font-weight: 700; color: #7a5d1d; }
+.cweek { font-size: 0.7rem; color: #5d6167; font-weight: 600; }
+.card.featured .cnum, .card.featured .cweek { color: var(--gold); }
+.navgroup .num { font-size: 0.76rem; font-weight: 700; }
