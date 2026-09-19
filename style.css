@@ -19,13 +19,13 @@
 
 * { box-sizing: border-box; }
 
-/* Page scale. Joseph preferred the site at 90% browser zoom, so the root
-   is set there: everything measured in rem follows it and the proportions
-   are untouched. Change this one number to rescale the whole site. */
-html {
-  font-size: 90%;
-  -webkit-text-size-adjust: 100%;
-}
+html { -webkit-text-size-adjust: 100%; }
+
+/* Page scale. The landing page reads better a little smaller — it is a
+   board to scan rather than a page to read — so it alone steps down.
+   The stylesheet is rem-based, so this one number moves type, spacing and
+   column widths together and leaves every proportion intact. */
+html.downscale { font-size: 93%; }
 
 body {
   margin: 0;
