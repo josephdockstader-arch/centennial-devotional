@@ -203,3 +203,30 @@
   v.addEventListener('timeupdate', clamp);
   v.addEventListener('seeked', clamp);
 })();
+
+/* slide deck viewer (2026-09-19) */
+(function () {
+  document.querySelectorAll('.deck').forEach(function (deck) {
+    var rail = deck.querySelector('.deckrail');
+    var prev = deck.querySelector('.deckprev');
+    var next = deck.querySelector('.decknext');
+    var cur = deck.querySelector('.deckcount b');
+    var n = parseInt(deck.dataset.count, 10) || 1;
+    var i = 0;
+    function show(k) {
+      i = Math.max(0, Math.min(n - 1, k));
+      rail.style.transform = 'translateX(' + (-i * 100) + '%)';
+      cur.textContent = i + 1;
+      prev.disabled = i === 0;
+      next.disabled = i === n - 1;
+    }
+    prev.addEventListener('click', function () { show(i - 1); });
+    next.addEventListener('click', function () { show(i + 1); });
+    deck.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(i + 1); }
+    });
+    deck.tabIndex = 0;
+    show(0);
+  });
+})();
