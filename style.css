@@ -683,3 +683,101 @@ table.sched td.num { color: var(--gold); }
   font-family: var(--sans); font-size: 0.74rem; color: var(--ink-soft);
   border-top: 1px solid var(--rule);
 }
+
+/* --------------------------- front-matter accordion (2026-09-19) */
+.intro .acc { border-bottom: 1px solid var(--rule); }
+.intro .acc:first-of-type { border-top: 1px solid var(--rule); }
+
+.intro .acc > summary {
+  cursor: pointer; list-style: none;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; padding: 1.05rem 0;
+}
+.intro .acc > summary::-webkit-details-marker { display: none; }
+.intro .acc > summary:focus-visible {
+  outline: 2px solid var(--green); outline-offset: 3px;
+}
+
+.intro .acch {
+  margin: 0; font-size: 1.3rem; font-weight: normal; color: var(--green-deep);
+  font-family: var(--serif); letter-spacing: 0; text-transform: none;
+  display: flex; align-items: baseline; gap: 0.6rem;
+}
+.intro .acch::after { display: none; }
+.intro .acch::before {
+  content: "\25B8"; color: var(--gold); font-size: 0.8em; line-height: 1;
+}
+.intro .acc[open] > summary .acch { color: var(--gold); }
+.intro .acc[open] > summary .acch::before { content: "\25BE"; }
+.intro .acc > summary:hover .acch { color: var(--gold); }
+
+.intro .accmeta {
+  flex: none; font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+}
+
+.intro .accbody { padding: 0 0 0.9rem; }
+.intro .accbody > :first-child { margin-top: 0; }
+.intro .accbody p { max-width: 42rem; }
+
+@media (max-width: 560px) {
+  .intro .acch { font-size: 1.16rem; }
+  .intro .accmeta { display: none; }
+}
+
+/* printing should never hide the text */
+@media print {
+  .intro .acc > summary { list-style: none; }
+  .intro .accbody { display: block !important; }
+}
+
+/* the four-week strip and the two practical columns, inside the last panel */
+.intro .cycle {
+  list-style: none; padding: 0; margin: 0.2rem 0 1.6rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
+}
+.intro .cycle li {
+  background: var(--paper-warm); border-top: 2px solid var(--gold);
+  border-radius: 3px; padding: 0.85rem 0.95rem;
+}
+.intro .cyw {
+  display: block; font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+.intro .cyt {
+  display: block; font-weight: normal; font-size: 1.12rem;
+  color: var(--green-deep); margin-bottom: 0.35rem;
+}
+.intro .cyd {
+  display: block; font-family: var(--sans); font-size: 0.8rem; line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.intro .doccols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+.intro .doc h3 {
+  margin: 0 0 0.5rem; font-family: var(--sans); font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.4rem;
+}
+.intro .doc p { font-size: 0.94em; max-width: none; }
+.intro .doc > :last-child { margin-bottom: 0; }
+
+@media (max-width: 720px) {
+  .intro .cycle, .intro .doccols { grid-template-columns: 1fr; }
+  .intro .doccols { gap: 1.8rem; }
+}
+
+/* the practical panel carries two columns, so it breaks out of the
+   40rem reading measure the essay sections keep */
+.intro .acc.wide .accbody {
+  width: min(56rem, calc(100vw - 2.5rem));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 720px) {
+  .intro .acc.wide .accbody {
+    width: auto; margin-left: 0; transform: none;
+  }
+}
