@@ -940,3 +940,19 @@ body .studywrap .studyapp { border-left: 0; border-right: 0; }
 @media (max-width: 760px) {
   .intro .accbody .plate { width: auto; margin-left: 0; transform: none; }
 }
+
+/* ------------ cohort work panel: one column now (2026-09-19) */
+/* Two columns fought the inline slides, so the prose runs single-column at
+   the reading measure. The week strip still breaks out across the top. */
+.intro .doccols { display: block; }
+.intro .doc + .doc { margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--rule); }
+.intro .doc p { font-size: 1em; max-width: none; }
+
+.intro .acc .cycle {
+  width: min(48rem, calc(100vw - 2.5rem));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 760px) {
+  .intro .acc .cycle { width: auto; margin-left: 0; transform: none; }
+}
