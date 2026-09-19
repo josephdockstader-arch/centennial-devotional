@@ -781,3 +781,24 @@ table.sched td.num { color: var(--gold); }
     width: auto; margin-left: 0; transform: none;
   }
 }
+
+/* ------------------------------ hero / year-list seam (2026-09-19) */
+/* "The Life of Jesus Christ" and "The year of study" were two large serif
+   headings stacked with nothing between them, reading as competing titles.
+   The hero keeps the title; the year list gets a rule and a subordinate
+   heading, so it reads as the next section rather than a second banner. */
+.herogrid h1 { text-wrap: balance; }
+
+.yearstudy {
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 1.6rem;
+}
+.yearhead { margin-bottom: 0.2rem; }
+.yearhead h2 {
+  font-size: 1.28rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 760px) { .yearstudy { margin-top: 1rem; } }
