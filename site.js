@@ -211,6 +211,7 @@
     var prev = deck.querySelector('.deckprev');
     var next = deck.querySelector('.decknext');
     var cur = deck.querySelector('.deckcount b');
+    if (!rail || !prev || !next || !cur) return;   // names page reuses .deck for its summary line
     var n = parseInt(deck.dataset.count, 10) || 1;
     var i = 0;
     function show(k) {
