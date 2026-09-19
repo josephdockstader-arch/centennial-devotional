@@ -607,3 +607,79 @@ table.sched td.num { color: var(--gold); }
 .yearhead h2::after { display: none; }
 .schedpage h2 { margin-top: 3rem; }
 .schedpage h2::after { display: none; }
+
+/* term headings for the always-visible year list */
+.termhead { margin: 2.2rem 0 0.2rem; font-family: var(--sans); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
+.schedpage .termhead { margin-top: 2.4rem; }
+.schedpage .schedwrap { margin-top: 0.4rem; }
+
+/* ------------------------------------- find your cohort (2026-09-19) */
+.namefind { position: relative; flex: 1 1 22rem; max-width: 26rem; text-align: left; }
+
+.nf-label {
+  display: block; font-family: var(--sans); font-size: 0.7rem;
+  font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-soft); margin: 0 0 0.35rem;
+}
+
+.nf-input {
+  width: 100%; font-family: var(--serif); font-size: 1.02rem;
+  color: var(--ink); background: #fff;
+  padding: 0.7rem 0.85rem; border: 1px solid var(--rule); border-radius: 3px;
+  -webkit-appearance: none; appearance: none;
+}
+.nf-input::placeholder { color: #9a9086; }
+.nf-input:focus {
+  outline: none; border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(29, 70, 52, 0.14);
+}
+.nf-input::-webkit-search-cancel-button { cursor: pointer; }
+
+.nf-help {
+  margin: 0.4rem 0 0; font-family: var(--sans); font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+.nf-out {
+  display: none; position: absolute; z-index: 40; left: 0; right: 0;
+  top: calc(100% - 1.3rem); margin-top: 0.4rem;
+  max-height: 20rem; overflow-y: auto;
+  background: #fff; border: 1px solid var(--rule); border-top: 2px solid var(--gold);
+  border-radius: 3px; box-shadow: 0 12px 28px rgba(18, 48, 31, 0.16);
+}
+.nf-out.open { display: block; }
+
+.nf-row {
+  display: block; padding: 0.6rem 0.85rem; text-decoration: none;
+  border-bottom: 1px solid var(--paper-warm); color: var(--ink);
+}
+.nf-row:last-child { border-bottom: 0; }
+.nf-row:hover, .nf-row.on, .nf-row:focus { background: var(--paper-warm); outline: none; }
+
+.nf-name { display: block; font-size: 1rem; color: var(--green-deep); }
+.nf-co {
+  display: block; font-family: var(--sans); font-size: 0.78rem;
+  font-weight: 600; color: var(--gold);
+}
+.nf-when {
+  display: block; font-family: var(--sans); font-size: 0.7rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
+}
+
+.nf-none {
+  margin: 0; padding: 0.85rem; font-family: var(--sans); font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.nf-none a { color: var(--green); font-weight: 600; }
+
+/* the hero row holds the search box plus the schedule link */
+.hero-actions { align-items: flex-start; }
+@media (max-width: 760px) {
+  .namefind { flex: 1 1 100%; max-width: none; }
+}
+
+.nf-more {
+  margin: 0; padding: 0.6rem 0.85rem; background: var(--paper-warm);
+  font-family: var(--sans); font-size: 0.74rem; color: var(--ink-soft);
+  border-top: 1px solid var(--rule);
+}
