@@ -185,3 +185,21 @@
     }
   });
 })();
+
+/* stop short of the exported end card (2026-09-19). The card fills the
+   frame, so the corner bug cannot cover it; data-stop is set in
+   pages/home.txt and is a plain number of seconds. */
+(function () {
+  var v = document.querySelector('.film video[data-stop]');
+  if (!v) return;
+  var stop = parseFloat(v.getAttribute('data-stop'));
+  if (!(stop > 0)) return;
+  function clamp() {
+    if (v.currentTime >= stop) {
+      v.pause();
+      if (v.currentTime > stop) v.currentTime = stop;
+    }
+  }
+  v.addEventListener('timeupdate', clamp);
+  v.addEventListener('seeked', clamp);
+})();
