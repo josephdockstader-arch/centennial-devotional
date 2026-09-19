@@ -913,3 +913,30 @@ body .studywrap .studyapp { border-left: 0; border-right: 0; }
   line-height: 1.5;
   color: var(--ink-soft);
 }
+
+/* ---------------------- slides as inline plates in the prose (2026-09-19) */
+.plate { margin: 1.5rem 0 1.6rem; }
+.platebox {
+  position: relative;
+  display: block;
+  border: 1px solid var(--rule);
+  background: var(--paper-warm);
+  line-height: 0;
+}
+.platebox > img { width: 100%; height: auto; display: block; }
+.plate figcaption {
+  margin: 0.55rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+/* the plates break out a little from the 40rem reading measure */
+.intro .accbody .plate {
+  width: min(48rem, calc(100vw - 2.5rem));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 760px) {
+  .intro .accbody .plate { width: auto; margin-left: 0; transform: none; }
+}
