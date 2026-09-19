@@ -802,3 +802,26 @@ table.sched td.num { color: var(--gold); }
   letter-spacing: 0.01em;
 }
 @media (max-width: 760px) { .yearstudy { margin-top: 1rem; } }
+
+/* ------------------------------- homepage video (2026-09-19) */
+.filmwrap { max-width: 64rem; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2rem); }
+
+.film {
+  margin: 1.6rem 0 0;
+  border-top: 2px solid var(--gold);
+  padding-top: 1.1rem;
+}
+.film video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--green-deep);
+  border: 1px solid var(--rule);
+}
+.film figcaption {
+  margin: 0.7rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
