@@ -849,3 +849,7 @@ video::-webkit-media-controls-fullscreen-button { display: none; }
   text-wrap: balance;
 }
 .film .filmtitle::after { display: none; }
+
+/* ------------------------- the names study, full-bleed (2026-09-19) */
+.studywrap { max-width: none; margin: 0; padding: 0; }
+body .studywrap .studyapp { border-left: 0; border-right: 0; }
