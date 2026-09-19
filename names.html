@@ -174,6 +174,10 @@ margin:0 0 .9rem}
 .mapleft{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
 .studyapp .maphead{padding:1.2rem clamp(1rem,3vw,2rem) .4rem}
 .studyapp .backlink{border:0;background:none;color:var(--st-ink);font-size:.86rem;padding:0 0 .7rem}
+.studyapp .crumblink{border:0;background:none;padding:0;font-family:var(--st-serif);
+font-style:italic;font-size:.92rem;color:var(--st-green);text-decoration:underline;
+text-underline-offset:3px}
+.studyapp .crumblink:hover{color:var(--st-gold)}
 .studyapp .maphead .crumb{margin-bottom:.35rem}
 .studyapp .maphead h2{margin:0;font-family:var(--st-serif);font-weight:400;
 font-size:clamp(1.5rem,3.2vw,2.15rem);color:var(--st-ink)}
@@ -450,7 +454,7 @@ function drawTab(){
    contents of the selected aspect. Everything the Study view holds is
    reachable here, one relationship at a time. */
 let mzoom = 1, mpan = {x:0, y:0}, aspect = "passages", selItem = 0;
-let mapExtent = null, fitNext = true;
+let mapExtent = null, fitNext = true, mapLevel = "branch";
 
 /* The four columns are wider than the canvas, so the branch is fitted to
    the view rather than left running off the right edge. */
@@ -502,12 +506,62 @@ function itemsOf(n, k){
 
 function trim(s, n){ s = s || ""; return s.length > n ? s.slice(0, n-1).trimEnd() + "…" : s; }
 
+function drawThemeBoard(){
+  const svg = document.getElementById("mapsvg");
+  const cam = document.getElementById("mcam");
+  const H = svg.clientHeight || 520;
+  document.getElementById("mapCrumb").textContent = "All themes";
+  document.getElementById("mapTitle").textContent = "Choose a theme";
+  document.getElementById("mapBack").hidden = true;
+
+  const rows = DATA.length;
+  const gap = Math.min(56, Math.max(34, (H - 80) / rows));
+  const midY = H / 2;
+  const y = i => midY - ((rows - 1) * gap) / 2 + i * gap;
+  const X0 = 40, X1 = 320;
+
+  let s = "";
+  DATA.forEach((t, i) => s += curve(X0 + 210, midY, X1, y(i),
+                                    t === entry._t ? "on" : ""));
+  s += box(X0, midY, 210, 56, "The Names of Christ",
+           DATA.reduce((a, t) => a + t.names.length, 0) + " entries",
+           "#1e4433", "#15311f", "#faf6ec");
+  DATA.forEach((t, i) => s += box(X1, y(i), 250, 46, esc(t.name),
+           t.names.length + " entries",
+           t === entry._t ? "#c6a769" : "#faf6ec", "#cfc3a4", "#1c2622", "T" + i));
+
+  mapExtent = {x0: X0 - 16, x1: X1 + 250 + 16, y0: y(0) - 44, y1: y(rows-1) + 44};
+  cam.innerHTML = s;
+  if (fitNext){ fitNext = false; fitMap(true); }
+  cam.setAttribute("transform", `translate(${mpan.x},${mpan.y}) scale(${mzoom})`);
+  document.getElementById("zVal").textContent = Math.round(mzoom*100) + "%";
+
+  cam.querySelectorAll("g.mn[data-id]").forEach(g => {
+    const go = () => {
+      const t = DATA[+g.dataset.id.slice(1)];
+      entry = t.names[0]; theme = t; aspect = "passages"; selItem = 0;
+      mapLevel = "branch"; fitNext = true;
+      drawThemes(); drawRead(); drawMap();
+    };
+    g.onclick = go;
+    g.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } };
+  });
+  document.getElementById("mapside").innerHTML =
+    '<h3>The Names of Christ</h3><div class="grule"></div>' +
+    '<p>Choose a theme to open its names. Each name opens its language, ' +
+    'meaning, passages and notes.</p>';
+}
+
 function drawMap(){
+  if (mapLevel === "themes") return drawThemeBoard();
   const svg = document.getElementById("mapsvg");
   const cam = document.getElementById("mcam");
   const t = entry._t, n = entry;
+  document.getElementById("mapBack").hidden = false;
+  document.getElementById("mapTitle").textContent = "Explore one relationship at a time";
   document.getElementById("mapCrumb").innerHTML =
-    "All themes &nbsp;/&nbsp; " + esc(t.name) + " &nbsp;/&nbsp; " + esc(n.name);
+    '<button class="crumblink" id="crumbAll">All themes</button>' +
+    " &nbsp;/&nbsp; " + esc(t.name) + " &nbsp;/&nbsp; " + esc(n.name);
   const H = svg.clientHeight || 520;
 
   const asp = aspectsOf(n);
@@ -568,6 +622,8 @@ function drawMap(){
     g.onclick = go;
     g.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } };
   });
+  const ca = document.getElementById("crumbAll");
+  if (ca) ca.onclick = () => { mapLevel = "themes"; fitNext = true; drawMap(); };
   drawMapSide();
 }
 function curve(x1,y1,x2,y2,cls){
@@ -648,7 +704,7 @@ function setMode(m){
   document.getElementById("tMap").setAttribute("aria-pressed", m==="map");
   document.getElementById("mbStudy").setAttribute("aria-pressed", m==="study");
   document.getElementById("mbMap").setAttribute("aria-pressed", m==="map");
-  if (m==="map"){ fitNext = true; setTimeout(drawMap, 30); }
+  if (m==="map"){ fitNext = true; mapLevel = "branch"; setTimeout(drawMap, 30); }
 }
 function mobileShowRead(){
   document.getElementById("side").classList.add("hide");
@@ -664,7 +720,9 @@ document.getElementById("tMap").onclick = () => setMode("map");
 document.getElementById("mbStudy").onclick = () => { setMode("study"); mobileShowList(); };
 document.getElementById("mbMap").onclick = () => setMode("map");
 document.getElementById("q").addEventListener("input", e => runFind(e.target.value));
-document.getElementById("mapBack").onclick = () => { setMode("study"); mobileShowList(); };
+document.getElementById("mapBack").onclick = () => {
+  mapLevel = "themes"; fitNext = true; drawMap();
+};
 document.getElementById("zIn").onclick = () => { mzoom = Math.min(2, mzoom+0.1); drawMap(); };
 document.getElementById("zOut").onclick = () => { mzoom = Math.max(0.4, mzoom-0.1); drawMap(); };
 document.getElementById("zFit").onclick = () => { fitNext = true; drawMap(); };
