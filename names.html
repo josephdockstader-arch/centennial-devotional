@@ -207,7 +207,11 @@ border-left:1px solid var(--st-rule);overflow-y:auto;padding:1.8rem 1.7rem 3rem}
 .studyapp .mapside h3{margin:0;font-family:var(--st-serif);font-weight:400;
 font-size:clamp(1.7rem,3vw,2.3rem);color:var(--st-green-deep);line-height:1.08}
 .studyapp .mapside .grule{width:2.4rem;height:2px;background:var(--st-gold);margin:.7rem 0 1rem}
-.studyapp .mapside .ref{font-family:var(--st-serif);font-size:1.05rem;color:var(--st-green);margin:0 0 .7rem}
+.studyapp .mapside .ref{font-family:var(--st-serif);font-size:1.05rem;color:var(--st-green);margin:0 0 .3rem}
+.studyapp .mapside .mapsum{font-family:var(--st-serif);font-size:1rem;line-height:1.45;
+color:var(--st-ink);margin:0 0 1rem}
+.studyapp .mapside .reltag{font-size:.74rem;letter-spacing:.04em;color:var(--st-ink-soft);margin:0 0 .7rem}
+.studyapp .mapside .fulltext{font-size:.92rem;line-height:1.6;color:var(--st-ink);margin:0 0 .6rem}
 .studyapp .mapside blockquote{margin:0 0 .6rem;font-family:var(--st-serif);font-size:1.16rem;
 line-height:1.5;color:var(--st-ink)}
 .studyapp .mapside h4{margin:1.3rem 0 .3rem;font-family:var(--st-serif);font-weight:400;
@@ -442,61 +446,124 @@ function drawTab(){
 }
 
 /* --------------------------------------------------------------- map */
-let mzoom = 1, mpan = {x:0, y:0}, mapNodes = [];
+/* Four columns: theme, names, the aspects of the selected name, and the
+   contents of the selected aspect. Everything the Study view holds is
+   reachable here, one relationship at a time. */
+let mzoom = 1, mpan = {x:0, y:0}, aspect = "passages", selItem = 0;
+let mapExtent = null, fitNext = true;
+
+/* The four columns are wider than the canvas, so the branch is fitted to
+   the view rather than left running off the right edge. */
+function fitMap(silent){
+  const svg = document.getElementById("mapsvg");
+  if (!mapExtent || !svg.clientWidth) return;
+  const w = mapExtent.x1 - mapExtent.x0, h = mapExtent.y1 - mapExtent.y0;
+  const k = Math.max(0.42, Math.min(1.15,
+              Math.min(svg.clientWidth / w, svg.clientHeight / h)));
+  mzoom = k;
+  mpan = {x: svg.clientWidth/2 - k*(mapExtent.x0+mapExtent.x1)/2,
+          y: svg.clientHeight/2 - k*(mapExtent.y0+mapExtent.y1)/2};
+  if (!silent){
+    document.getElementById("mcam").setAttribute("transform",
+      `translate(${mpan.x},${mpan.y}) scale(${mzoom})`);
+    document.getElementById("zVal").textContent = Math.round(mzoom*100) + "%";
+  }
+}
+
+function aspectsOf(n){
+  const out = [];
+  if (n.lang || n.script || n.translit)
+    out.push({k:"language", label:"Language", n:1});
+  if (n.meaning || n.summary) out.push({k:"meaning", label:"Meaning", n:1});
+  if (n.direct.length) out.push({k:"passages", label:"Passages", n:n.direct.length});
+  if (n.related.length) out.push({k:"related", label:"Related usage", n:n.related.length});
+  if (n.note || n.world) out.push({k:"notes", label:"Language notes", n:1});
+  if (n.occurs) out.push({k:"occurs", label:"Occurrences", n:1});
+  if (n.sources || n.confidence) out.push({k:"sources", label:"Sources", n:1});
+  return out;
+}
+
+function itemsOf(n, k){
+  if (k === "language")
+    return [{t: n.lang, s: [n.script, n.translit, n.strongs].filter(Boolean).join("  ·  "), full:""}];
+  if (k === "meaning")
+    return [{t: n.meaning || "—", s: "", full: n.summary || ""}];
+  if (k === "passages")
+    return n.direct.map(v => ({t: v.ref, s: v.title || "Direct reference to Jesus", full: v.text}));
+  if (k === "related")
+    return n.related.map(v => ({t: v.ref, s: v.title || "Related vocabulary",
+                                full: (v.why ? v.why + " — " : "") + v.text}));
+  if (k === "notes") return [{t:"Language notes", s:"", full: [n.note, n.world].filter(Boolean).join("  ")}];
+  if (k === "occurs") return [{t:"Occurrences", s:"", full: n.occurs}];
+  if (k === "sources")
+    return [{t: n.confidence ? "Confidence: " + n.confidence : "Sources", s:"", full: n.sources}];
+  return [];
+}
+
+function trim(s, n){ s = s || ""; return s.length > n ? s.slice(0, n-1).trimEnd() + "…" : s; }
+
 function drawMap(){
   const svg = document.getElementById("mapsvg");
   const cam = document.getElementById("mcam");
-  const t = entry._t;
-  document.getElementById("mapCrumb").innerHTML = "All themes &nbsp;/&nbsp; " + esc(t.name);
-  const W = svg.clientWidth || 900, H = svg.clientHeight || 520;
+  const t = entry._t, n = entry;
+  document.getElementById("mapCrumb").innerHTML =
+    "All themes &nbsp;/&nbsp; " + esc(t.name) + " &nbsp;/&nbsp; " + esc(n.name);
+  const H = svg.clientHeight || 520;
 
-  const rows = t.names.length;
-  const gapY = Math.min(84, Math.max(56, (H - 120) / Math.max(1, rows)));
-  const x0 = 40, x1 = 300, x2 = 560;
+  const asp = aspectsOf(n);
+  if (!asp.some(a => a.k === aspect)) aspect = asp.length ? asp[0].k : "passages";
+  const items = itemsOf(n, aspect);
+  if (selItem >= items.length) selItem = 0;
+
+  const X = [28, 250, 486, 716];
   const midY = H / 2;
-  const startY = midY - ((rows - 1) * gapY) / 2;
+  const colY = (count, gap) => {
+    const g = Math.min(gap, Math.max(38, (H - 90) / Math.max(1, count)));
+    return i => midY - ((count - 1) * g) / 2 + i * g;
+  };
+  const yName = colY(t.names.length, 58);
+  const yAsp  = colY(asp.length, 54);
+  const yItem = colY(items.length, 62);
+  const selYi = t.names.indexOf(n);
 
   let s = "";
-  const nodes = [];
-  t.names.forEach((n, i) => {
-    const y = startY + i * gapY;
-    const active = n === entry;
-    s += curve(x0 + 172, midY, x1, y, active ? "on" : "");
-    nodes.push({n, x:x1, y, active});
-  });
+  t.names.forEach((m, i) => s += curve(X[0]+186, midY, X[1], yName(i), m===n ? "on" : ""));
+  asp.forEach((a, i) => s += curve(X[1]+198, yName(selYi), X[2], yAsp(i),
+                                   a.k===aspect ? "on" : ""));
+  const aspIdx = asp.findIndex(a => a.k === aspect);
+  items.forEach((it, i) => s += curve(X[2]+188, yAsp(aspIdx < 0 ? 0 : aspIdx), X[3], yItem(i),
+                                      aspect === "related" ? "rel" : (i===selItem ? "on" : "")));
 
-  const sel = entry;
-  const vs = sel.direct.slice(0,2).map(v => ({v, rel:false}))
-    .concat(sel.related.slice(0,2).map(v => ({v, rel:true})));
-  const selY = startY + t.names.indexOf(sel) * gapY;
-  const vGap = 96, vStart = selY - ((vs.length - 1) * vGap) / 2;
-  vs.forEach((o, i) => {
-    const y = vStart + i * vGap;
-    s += curve(x1 + 186, selY, x2, y, o.rel ? "rel" : "on");
-  });
+  s += box(X[0], midY, 186, 54, esc(t.name), esc(t.names.length + " names"),
+           "#c6a769", "#b08d3e", "#1c2622");
+  t.names.forEach((m, i) => s += box(X[1], yName(i), 198, 46, esc(trim(m.name, 24)), "",
+           m===n ? "#1e4433" : "#faf6ec", "#cfc3a4", m===n ? "#faf6ec" : "#1c2622",
+           "N" + t.names.indexOf(m)));
+  asp.forEach((a, i) => s += box(X[2], yAsp(i), 188, 46, esc(a.label),
+           a.n > 1 ? esc(a.n + " entries") : "",
+           a.k===aspect ? "#2c5843" : "#f4eedf", "#cfc3a4",
+           a.k===aspect ? "#faf6ec" : "#1c2622", "A" + i));
+  items.forEach((it, i) => s += box(X[3], yItem(i), 286, 54, esc(trim(it.t, 34)),
+           esc(trim(it.s, 42)), "#ffffff", "#cfc3a4", "#1c2622", "I" + i));
 
-  s += box(x0, midY, 172, 56, esc(t.name), "", "#c6a769", "#b08d3e", "#1c2622");
-  nodes.forEach(o => {
-    s += box(o.x, o.y, 186, 50, esc(o.n.name), "",
-             o.active ? "#1e4433" : "#faf6ec", "#cfc3a4",
-             o.active ? "#faf6ec" : "#1c2622", "n" + DATA.indexOf(o.n._t) + "_" + o.n._t.names.indexOf(o.n));
-  });
-  vs.forEach((o, i) => {
-    const y = vStart + i * vGap;
-    s += box(x2, y, 252, 62, esc(o.v.ref),
-             esc(o.v.title || "Direct reference to Jesus"),
-             "#ffffff", "#cfc3a4", "#1c2622");
-  });
+  const ys = [midY].concat(t.names.map((_,i)=>yName(i)), asp.map((_,i)=>yAsp(i)),
+                           items.map((_,i)=>yItem(i)));
+  mapExtent = {x0: X[0]-16, x1: X[3]+286+16,
+               y0: Math.min(...ys)-42, y1: Math.max(...ys)+42};
 
   cam.innerHTML = s;
+  if (fitNext){ fitNext = false; fitMap(true); }
   cam.setAttribute("transform", `translate(${mpan.x},${mpan.y}) scale(${mzoom})`);
   document.getElementById("zVal").textContent = Math.round(mzoom*100) + "%";
 
   cam.querySelectorAll("g.mn[data-id]").forEach(g => {
-    g.style.cursor = "pointer";
+    const id = g.dataset.id, kind = id[0], idx = +id.slice(1);
     const go = () => {
-      const [ti, ni] = g.dataset.id.slice(1).split("_").map(Number);
-      entry = DATA[ti].names[ni]; drawMap(); drawMapSide(); drawThemes();
+      if (kind === "N"){ entry = t.names[idx]; selItem = 0; aspect = "passages";
+                         fitNext = true; drawThemes(); }
+      else if (kind === "A"){ aspect = aspectsOf(entry)[idx].k; selItem = 0; }
+      else selItem = idx;
+      drawMap();
     };
     g.onclick = go;
     g.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } };
@@ -511,18 +578,22 @@ function box(x,y,w,h,label,sub,fill,stroke,color,id){
   const ty = sub ? y-6 : y;
   return `<g class="mn"${id?` data-id="${id}" tabindex="0" role="button" aria-label="${label}"`:""}>` +
     `<rect x="${x}" y="${y-h/2}" width="${w}" height="${h}" rx="9" fill="${fill}" stroke="${stroke}"/>` +
-    `<text x="${x+16}" y="${ty}" fill="${color}">${label}</text>` +
-    (sub?`<text class="sm" x="${x+16}" y="${y+14}">${sub}</text>`:"") + `</g>`;
+    `<text x="${x+15}" y="${ty}" fill="${color}">${label}</text>` +
+    (sub?`<text class="sm" x="${x+15}" y="${y+14}">${sub}</text>`:"") + `</g>`;
 }
 function drawMapSide(){
-  const n = entry, v = n.direct[0] || {ref:"",text:""};
+  const n = entry;
+  const items = itemsOf(n, aspect);
+  const it = items[selItem] || {t:"", s:"", full:""};
+  const showQuote = aspect === "passages" || aspect === "related";
   document.getElementById("mapside").innerHTML = `
     <h3>${esc(n.name)}</h3><div class="grule"></div>
-    <p class="ref">${esc(v.ref)} &nbsp;&middot;&nbsp; KJV</p>
-    <p style="font-size:.78rem;color:var(--ink-soft);margin:-.4rem 0 .7rem">${esc(v.title||"Direct reference to Jesus")}</p>
-    <blockquote>&ldquo;${esc(v.text || v.ref)}&rdquo;</blockquote>
-    <h4>Meaning in this passage</h4><p>${n.summary ? md(n.summary) : esc(n.meaning || "\u2014")}</p>
-    ${n.lang ? `<h4>${esc(n.lang)}</h4><p>${esc(n.script)} ${n.translit?"&middot; <i>"+esc(n.translit)+"</i>":""}</p>` : ""}
+    ${n.summary ? `<p class="mapsum">${md(n.summary)}</p>` : ""}
+    <p class="ref">${esc(it.t)}${showQuote ? " &nbsp;&middot;&nbsp; KJV" : ""}</p>
+    ${it.s ? `<p class="reltag">${esc(it.s)}</p>` : ""}
+    ${it.full ? (showQuote
+        ? `<blockquote>&ldquo;${esc(it.full)}&rdquo;</blockquote>`
+        : `<p class="fulltext">${esc(it.full)}</p>`) : ""}
     <button class="openfull" id="openFull">Open full study &#8594;</button>
     <div class="noteline">${INFO}<span>Related usage is shown separately so shared
     vocabulary does not imply the same referent.</span></div>`;
@@ -577,7 +648,7 @@ function setMode(m){
   document.getElementById("tMap").setAttribute("aria-pressed", m==="map");
   document.getElementById("mbStudy").setAttribute("aria-pressed", m==="study");
   document.getElementById("mbMap").setAttribute("aria-pressed", m==="map");
-  if (m==="map") setTimeout(drawMap, 30);
+  if (m==="map"){ fitNext = true; setTimeout(drawMap, 30); }
 }
 function mobileShowRead(){
   document.getElementById("side").classList.add("hide");
@@ -596,8 +667,8 @@ document.getElementById("q").addEventListener("input", e => runFind(e.target.val
 document.getElementById("mapBack").onclick = () => { setMode("study"); mobileShowList(); };
 document.getElementById("zIn").onclick = () => { mzoom = Math.min(2, mzoom+0.1); drawMap(); };
 document.getElementById("zOut").onclick = () => { mzoom = Math.max(0.4, mzoom-0.1); drawMap(); };
-document.getElementById("zFit").onclick = () => { mzoom = 1; mpan = {x:0,y:0}; drawMap(); };
-window.addEventListener("resize", () => { if (mode==="map") drawMap(); });
+document.getElementById("zFit").onclick = () => { fitNext = true; drawMap(); };
+window.addEventListener("resize", () => { if (mode==="map"){ fitNext = true; drawMap(); } });
 
 (function(){
   const svg = document.getElementById("mapsvg");
