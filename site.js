@@ -168,3 +168,20 @@
     }
   });
 })();
+
+/* fullscreen on the figure, not the video, so the academy bug stays on
+   the picture instead of being dropped by the native player (2026-09-19) */
+(function () {
+  var box = document.querySelector('.filmbox');
+  var btn = box && box.querySelector('.filmfs');
+  if (!box || !btn) return;
+  btn.addEventListener('click', function () {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (box.requestFullscreen) {
+      box.requestFullscreen().catch(function () {});
+    } else if (box.webkitRequestFullscreen) {
+      box.webkitRequestFullscreen();
+    }
+  });
+})();
