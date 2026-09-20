@@ -973,6 +973,16 @@ body .studywrap .studyapp { border-left: 0; border-right: 0; }
   color: var(--ink-soft);
 }
 /* the plates break out a little from the 40rem reading measure */
+.plate.wide {
+  width: min(64rem, calc(100vw - 2.5rem));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.plate.wide .platebox { cursor: zoom-in; }
+@media (max-width: 760px) {
+  .plate.wide { width: auto; margin-left: 0; transform: none; }
+}
+
 .intro .accbody .plate {
   width: min(48rem, calc(100vw - 2.5rem));
   margin-left: 50%;
