@@ -130,6 +130,36 @@ body {
 }
 .cohortnav[hidden] { display: none; }
 
+/* the small Testimony menu (2026-09-20): two links, right-aligned under the bar */
+.testnav {
+  position: absolute;
+  right: clamp(1rem, 4vw, 3rem);
+  top: calc(100% + 0.5rem);
+  width: min(22rem, calc(100vw - 2rem));
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 18px 44px rgba(18, 48, 31, 0.16);
+  z-index: 30;
+}
+.testnav[hidden] { display: none; }
+.testnav a {
+  display: block;
+  padding: 0.7rem 1.2rem;
+  text-decoration: none;
+  color: var(--green-deep);
+}
+.testnav a:hover { background: rgba(217, 184, 102, 0.14); }
+.testnav a + a { border-top: 1px solid var(--rule); }
+.testnav .tn-title { display: block; font-family: var(--serif); font-size: 1.05rem; }
+.testnav .tn-sub { display: block; font-family: var(--sans); font-size: 0.74rem; color: var(--ink-soft); margin-top: 0.15rem; }
+@media (max-width: 640px) {
+  .testnav { right: 0; left: 0; width: auto; margin: 0 clamp(0.5rem, 3vw, 1rem); }
+}
+
 .navgroup h3 {
   margin: 0 0 0.6rem;
   font-family: var(--sans);
@@ -483,7 +513,7 @@ footer .vivit {
 }
 
 @media print {
-  .bar, .pager, .menubtn, .cohortnav { display: none; }
+  .bar, .pager, .menubtn, .cohortnav, .testnav { display: none; }
   body { background: #fff; font-size: 11pt; }
   .cohort { max-width: none; }
   footer { background: none; color: #555; }
@@ -548,6 +578,7 @@ table.sched a:hover { color: #b0872f; }
 .topnav a:hover, .topnav .menubtn:hover { color: var(--green-deep); background: none; }
 .topnav a.here, .topnav .menubtn.here { color: var(--green-deep); border-bottom-color: var(--gold); }
 .topnav .menubtn .chev { font-size: 0.65em; }
+.topnav .menubtn { white-space: nowrap; }
 @media (max-width: 640px) {
   /* phones: the links stay; the nav wraps to a second row under the brand */
   .topnav { flex-wrap: wrap; gap: 0.2rem 1rem; }

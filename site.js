@@ -1,26 +1,39 @@
+/* header menus: every .menubtn opens the panel named by aria-controls;
+   opening one closes the others (Testimony menu added 2026-09-20) */
 (function () {
-  var btn = document.querySelector('.menubtn');
-  var nav = document.getElementById('cohortnav');
-  if (!btn || !nav) return;
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.menubtn'));
+  var menus = [];
+  btns.forEach(function (btn) {
+    var nav = document.getElementById(btn.getAttribute('aria-controls') || '');
+    if (nav) menus.push({ btn: btn, nav: nav });
+  });
+  if (!menus.length) return;
 
-  function setOpen(open) {
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    nav.hidden = !open;
+  function setOpen(m, open) {
+    m.btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    m.nav.hidden = !open;
   }
+  function closeAll() { menus.forEach(function (m) { setOpen(m, false); }); }
 
-  btn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    setOpen(nav.hidden);
+  menus.forEach(function (m) {
+    m.btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var wasHidden = m.nav.hidden;
+      closeAll();
+      setOpen(m, wasHidden);
+    });
   });
 
   document.addEventListener('click', function (e) {
-    if (!nav.hidden && !nav.contains(e.target) && e.target !== btn) {
-      setOpen(false);
-    }
+    menus.forEach(function (m) {
+      if (!m.nav.hidden && !m.nav.contains(e.target) && e.target !== m.btn) {
+        setOpen(m, false);
+      }
+    });
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') setOpen(false);
+    if (e.key === 'Escape') closeAll();
   });
 })();
 
