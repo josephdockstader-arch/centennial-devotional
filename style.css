@@ -1017,3 +1017,17 @@ body .studywrap .studyapp { border-left: 0; border-right: 0; }
 .talkdays .ttitle { font-family: var(--serif); font-size: 1.1rem; color: var(--green-deep); }
 .talkdays .twho { color: var(--ink-soft); }
 .talkdays .tpending { margin: 0; font-style: italic; color: #777; }
+
+/* --- 2026-10-11: "This week in devotional" pinned card on the homepage --- */
+.thisweek { max-width: 64rem; margin: 1rem auto 0.4rem; padding: 1.1rem clamp(1rem, 3vw, 2rem) 0.8rem; background: var(--paper-warm); border-top: 3px solid var(--gold); }
+.thisweek[hidden] { display: none; }
+.twbrow { margin: 0 0 0.3rem; font-family: var(--sans); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #b0872f; }
+.thisweek .tw-now { display: none; }
+.thisweek.now .tw-now { display: inline; }
+.thisweek.now .tw-next { display: none; }
+.twhead { display: flex; align-items: flex-start; gap: 1.2rem; }
+.twhead .unlink { margin-left: auto; }
+.thisweek .talkdays { margin: 0.6rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 1.6rem; }
+.thisweek .talkdays li { display: block; }
+.thisweek .talkdays .twho { display: block; font-size: 0.9rem; }
+@media (max-width: 640px) { .twhead { flex-wrap: wrap; } .twhead .unlink { margin-left: 0; } }
