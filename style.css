@@ -1007,3 +1007,13 @@ body .studywrap .studyapp { border-left: 0; border-right: 0; }
 @media (max-width: 760px) {
   .intro .acc .cycle { width: auto; margin-left: 0; transform: none; }
 }
+
+/* --- 2026-10-11: talk days on cohort pages (@K lines) --- */
+.talkdays { margin: 1.4rem 0 0.4rem; }
+.talkdays .tday { padding: 0.6rem 0; border-bottom: 1px solid #f4efe3; }
+.talkdays .tdate { margin: 0 0 0.25rem; font-family: var(--sans); font-size: 0.78em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #b0872f; }
+.talkdays ul { list-style: none; margin: 0; padding: 0; }
+.talkdays li { padding: 0.15rem 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; }
+.talkdays .ttitle { font-family: var(--serif); font-size: 1.1rem; color: var(--green-deep); }
+.talkdays .twho { color: var(--ink-soft); }
+.talkdays .tpending { margin: 0; font-style: italic; color: #777; }
