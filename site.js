@@ -244,3 +244,14 @@
     show(0);
   });
 })();
+
+/* talk titles wait for the cohort's banner; names show meanwhile
+   (Joseph, 10/21/26). The build hides them by its own date; this
+   re-checks by the visitor's */
+(function () {
+  var t = new Date(), p = function (n) { return n < 10 ? '0' + n : '' + n; },
+      d = t.getFullYear() + '-' + p(t.getMonth() + 1) + '-' + p(t.getDate());
+  Array.prototype.forEach.call(document.querySelectorAll('[data-from]'), function (el) {
+    el.hidden = d < el.getAttribute('data-from');
+  });
+})();
