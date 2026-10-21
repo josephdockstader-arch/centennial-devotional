@@ -1016,6 +1016,8 @@ body .studywrap .studyapp { border-left: 0; border-right: 0; }
 .talkdays li { padding: 0.15rem 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; }
 .talkdays .ttitle { font-family: var(--serif); font-size: 1.1rem; color: var(--green-deep); }
 .talkdays .twho { color: var(--ink-soft); }
+.talkdays a.tread { text-decoration: underline; text-decoration-color: #d9b866; text-underline-offset: 3px; }
+.talkdays a.tread:hover { text-decoration-color: #b0872f; }
 .talkdays .tpending { margin: 0; font-style: italic; color: #777; }
 
 /* --- 2026-10-11: "This week in devotional" pinned card on the homepage --- */
