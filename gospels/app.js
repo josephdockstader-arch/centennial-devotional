@@ -44,21 +44,30 @@ frame.appendChild(el("div", "titlepage",
   `Touch any word for its meaning, any verse number to compare translations, and any olive leaf for a note.</p>` +
   `<a class="begin">Begin reading</a>`));
 const jstOf = {}; let curPart = -1;
+const BOT = Object.assign({wr: [], spray: [], vine: []}, G.bot || {});
 G.sections.forEach((s, i) => {
   if (s.part !== curPart) {
     curPart = s.part; const p = G.parts[curPart];
-    frame.appendChild(el("div", "part", ((G.garlands || []).includes(curPart) ? `<img class="garland"${dim("g_" + (curPart + 1))} src="art/g_${curPart + 1}.webp" alt="">` : "") + `<div class="kick">Part ${["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve"][curPart] || curPart + 1}</div><h2>${esc(p.t)}</h2>` +
+    const NUM = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve"][curPart] || curPart + 1;
+    const wr = BOT.wr.length ? BOT.wr[curPart % BOT.wr.length] : null;
+    const head = `<div class="kick">Part ${NUM}</div><h2>${esc(p.t)}</h2>`;
+    frame.appendChild(el("div", "part" + (wr ? " wreathed" : ""),
+      (wr ? `<div class="wreath"><img${dim(wr)} src="art/${wr}.webp" alt=""><div class="in">${head}</div></div>`
+          : ((G.garlands || []).includes(curPart) ? `<img class="garland"${dim("g_" + (curPart + 1))} src="art/g_${curPart + 1}.webp" alt="">` : "") + head) +
       (p.art ? `<img class="scene" loading="lazy"${dim(p.art)} src="art/${p.art}.webp" alt="">` : "")));
     stops.push({t: "p", i, name: p.t});
   }
   stops.push({t: "s", i, name: s.t});
   const sec = el("div", "sec"); sec.dataset.i = i;
-  const sp = G.sprigs ? (i * 7 + 3) % G.sprigs : -1;
-  let h = `<h3${sp >= 0 ? ' class="has-sprig"' : ""}>${esc(s.t)}${sp >= 0 ? `<img class="sprig" loading="lazy"${dim("sprig_" + sp)} src="art/sprig_${sp}.webp" alt="">` : ""}</h3><div class="cols">`;
+  const spr = BOT.spray.length ? BOT.spray[(i * 5 + 1) % BOT.spray.length] : null;
+  const sprI = spr ? `<img class="spr" loading="lazy"${dim(spr)} src="art/${spr}.webp" alt="">` : "";
+  const vine = BOT.vine.length && i % 4 === 1 ? BOT.vine[((i - 1) / 4) % BOT.vine.length] : null;
+  let h = (vine ? `<img class="mvine ${((i - 1) / 4) % 2 ? "r" : "l"}" loading="lazy"${dim(vine)} src="art/${vine}.webp" alt="">` : "") +
+    `<h3${spr ? ' class="sprayed"' : ""}>${sprI}<span>${esc(s.t)}</span>${sprI.replace('class="spr"', 'class="spr r"')}</h3><div class="cols">`;
   s.c.forEach((col, bi) => {
     if (s.wide && bi === s.wide[0]) { h += `<div class="col empty wide" style="grid-column:span ${s.wide[1]}"><img loading="lazy"${dim(s.wide[2])} src="art/${s.wide[2]}.webp" alt=""></div>`; return; }
     if (s.wide && bi > s.wide[0] && bi < s.wide[0] + s.wide[1]) return;
-    if (!col.length) { h += `<div class="col empty">${s.art && s.art[bi] ? `<img loading="lazy"${dim(s.art[bi])} src="art/${s.art[bi]}.webp" alt="">` : ""}</div>`; return; }
+    if (!col.length) { h += `<div class="col empty${s.study ? " study " + s.study : ""}">${s.art && s.art[bi] ? `<img loading="lazy"${dim(s.art[bi])} src="art/${s.art[bi]}.webp" alt="">` : ""}</div>`; return; }
     let prev = null; h += `<div class="col">`;
     col.forEach((v, n) => { if (v.j) jstOf[v.r] = v.j; h += verseHTML(v, n === 0, prev); prev = v.r.split(" ")[1].split(":")[0]; });
     h += `</div>`;
@@ -383,15 +392,21 @@ const readPanel = $("#readPanel"), BK = [["Matt","Matthew"],["Mark","Mark"],["Lu
 function openReading() {
   const cur = currentSec();
   readPanel.innerHTML = `<button class="x" aria-label="Close">×</button><h4>Reading list for the year</h4>` +
-    `<p class="lead">Read all four Gospels this year, one portion with each cohort. The story of his mortal life begins with John, so the reading begins with The Lord and follows the story to the end. Together the portions take in every verse once. Choose one to go to where it begins.</p>` +
-    G.reading.map(r => `<a class="rd${cur >= r.at && cur <= r.end ? " on" : ""}" data-i="${r.at}">` +
-      `<span class="wk">${r.week ? "Week of " + esc(r.week) : "Cohort " + r.n}</span>` +
-      `<b>${esc(r.title)}</b>` +
-      `<span class="ft">${esc(r.from)}${r.to !== r.from ? " to " + esc(r.to) : ""}</span>` +
-      BK.filter(([b]) => r.refs[b]).map(([b, name]) => `<span class="rf"><i>${name}</i> ${esc(r.refs[b])}</span>`).join("") + `</a>`).join("");
+    `<p class="lead">Read all four Gospels this year, one portion with each cohort. The story of his mortal life begins with John, so the reading begins with The Lord and follows the story to the end. Together the portions take in every verse once. Each portion lists its passages by the same titles as the timeline. Choose any passage to go to it.</p>` +
+    G.reading.map(r => {
+      let body = "", part = -1;                                  // the portion, part by part, by passage title
+      for (let i = r.at; i <= r.end; i++) {
+        const sc = G.sections[i];
+        if (sc.part !== part) { part = sc.part; body += `${body ? "</span>" : ""}<span class="pt"><i>${esc(G.parts[part].t)}</i>`; }
+        body += `<a data-i="${i}"${i === cur ? ' class="here"' : ""}>${esc(sc.t)}</a>`;
+      }
+      return `<div class="rd${cur >= r.at && cur <= r.end ? " on" : ""}">` +
+        `<span class="wk">${r.week ? "Week of " + esc(r.week) : "Cohort " + r.n}</span>` +
+        `<b data-i="${r.at}">${esc(r.title)}</b>${body}</span></div>`;
+    }).join("");
   readPanel.classList.add("on"); const on = readPanel.querySelector(".on"); if (on) on.scrollIntoView({block: "center"});
 }
-readPanel.addEventListener("click", e => { if (e.target.classList.contains("x")) return closeMenus(); const a = e.target.closest(".rd"); if (a) { closeMenus(); goSection(+a.dataset.i); } });
+readPanel.addEventListener("click", e => { if (e.target.classList.contains("x")) return closeMenus(); const a = e.target.closest("[data-i]"); if (a) { closeMenus(); goSection(+a.dataset.i); } });
 readPanel.addEventListener("wheel", e => e.stopPropagation());
 
 /* jump to a reference ("John 3:16", "Matt 5") or a phrase ("lost sheep") */

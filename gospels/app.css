@@ -227,3 +227,29 @@ body.jst-in .jstw.fb{display:block}
 .rd.on{background:linear-gradient(90deg,rgba(217,184,102,.16),transparent 70%)}
 
 .end .credits{max-width:620px;margin:60px auto 0;font:13px/1.6 var(--sans);color:#9a9086}
+
+/* ---------- botanicals around the text ---------- */
+.part.wreathed{margin-top:150px}
+.wreath{position:relative;width:820px;max-width:100%;margin:0 auto}
+.wreath img{display:block;width:100%;height:auto}
+.wreath .in{position:absolute;left:18%;right:18%;top:50%;transform:translateY(-50%)}
+.wreath h2{font-size:42px;line-height:1.12}
+.sec h3.sprayed{display:flex;align-items:center;justify-content:center;gap:14px}
+.sec h3.sprayed::after{display:none}
+.sec h3 .spr{height:58px;width:auto;flex:none;opacity:.95}
+.sec h3 .spr.r{transform:scaleX(-1)}
+.mvine{position:absolute;top:10px;width:130px;height:auto;opacity:.92}
+.mvine.l{left:-165px}.mvine.r{right:-165px}
+.col.empty.study img{width:62%;margin-top:14px;opacity:.95}
+
+.col.empty.study.vine img{width:30%;margin-top:0}
+
+/* reading list by part and passage title */
+.rd{cursor:default}
+.rd b{cursor:pointer}
+.rd .pt{display:block;font:14.5px/1.75 var(--serif);color:var(--ink-soft);margin-top:4px}
+.rd .pt i{display:block;font:600 9.5px var(--sans);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1px}
+.rd .pt a{cursor:pointer;white-space:normal}
+.rd .pt a:not(:last-child)::after{content:"  ·  ";color:var(--gold-soft);white-space:pre}
+.rd .pt a:hover{color:var(--green);text-decoration:underline;text-decoration-color:var(--gold)}
+.rd .pt a.here{color:var(--green);font-style:italic}
