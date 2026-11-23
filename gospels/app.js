@@ -432,7 +432,7 @@ function drawMarks() {
     MARKS.map((m, i) => `<div class="row">${link(`data-go="${i}"`, esc(m.name))}<button class="x" data-del="${i}" aria-label="Remove bookmark">×</button></div>`).join("") +
     `<div class="row">${link("data-add", "<i>Bookmark this place</i>")}</div>` +
     `<h5>Reading</h5><div class="row">${link("data-contents", "All the passages")}</div>` + ((G.reading || []).length ? `<div class="row">${link("data-reading", "Reading list for the year")}</div>` : "") +
-    `<div class="row">${link("data-fit", "All four columns")}</div><div class="row">${link("data-comfy", "Comfortable reading: one Gospel, larger")}</div><div class="row">${link("data-study", "Reading settings")}</div></div>`;
+    `<div class="row">${link("data-fit", "All four columns")}</div><div class="row">${link("data-comfy", "Comfortable reading: one Gospel, larger")}</div><div class="row">${link("data-study", "Reading settings")}</div><h5>Devotional</h5><div class="row"><a href="../">Back to the devotional site</a></div></div>`;
   if (q) { $("#jumpIn").value = q; showJump(q); }
 }
 markMenu.addEventListener("click", e => {

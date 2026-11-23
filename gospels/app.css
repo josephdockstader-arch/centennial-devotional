@@ -344,3 +344,8 @@ img.curl{display:block;height:auto;margin:22px 0 0 14px;opacity:.95}
 .titlepage .kick{margin-top:14px}
 .sec h3.branched{padding-bottom:52px;margin-bottom:8px}
 .sec h3 .tb{top:2px;width:auto;height:74px;max-width:420px;object-fit:contain}
+
+/* the way back to the devotional site */
+#home{font:11.5px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;margin-right:22px;padding:6px 0;border-bottom:1px solid transparent;white-space:nowrap}
+#home:hover{color:var(--green);border-bottom-color:var(--gold)}
+.menu .row a[href]{color:var(--green);text-decoration:none}
