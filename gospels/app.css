@@ -253,3 +253,94 @@ body.jst-in .jstw.fb{display:block}
 .rd .pt a:not(:last-child)::after{content:"  ·  ";color:var(--gold-soft);white-space:pre}
 .rd .pt a:hover{color:var(--green);text-decoration:underline;text-decoration-color:var(--gold)}
 .rd .pt a.here{color:var(--green);font-style:italic}
+
+
+/* ================= second review pass (11/19/26) ================= */
+/* type: comfortable on a laptop at four-column fit (about 17px at 1280, 19px at 1440) */
+:root{--colw:352px;--gut:30px}
+.col{font-size:20.5px;line-height:32px}
+.jstw{font-size:17.5px;line-height:26px}
+#heads span{font-size:11.5px;padding:8px 0 8px}
+#heads{height:28px}
+
+/* title page: panorama, title, byline, introduction and Begin reading inside one laptop screen */
+.titlepage{padding:26px 0 30px;min-height:0}
+.titlepage .pano{width:112%;margin:0 -6% -26px;height:400px;object-fit:cover;object-position:50% 82%;
+  -webkit-mask-image:linear-gradient(transparent,#000 26%);mask-image:linear-gradient(transparent,#000 26%)}
+.titlepage .kick{margin-top:0;font-size:12px}
+.titlepage h1{font-size:104px;margin:8px 0 2px}
+.titlepage .by{font-size:28px}
+.titlepage .fl{width:230px;margin:14px auto 10px}
+.titlepage .how{max-width:660px;font-size:20px;line-height:1.5}
+.titlepage .begin{margin-top:20px;border:0;background:none;padding:6px 2px;border-bottom:1px solid var(--gold-soft)}
+
+/* Joseph Smith's changes set into the verse */
+body.jst-in .ja::after{text-decoration-thickness:1px;text-decoration-color:rgba(176,135,47,.55);text-underline-offset:3px}
+body.jst-in .ja.pre::after{content:" " attr(data-t)}
+body.jst-in .jc{color:#b3aa9a;text-decoration-thickness:1px;text-decoration-color:rgba(165,156,140,.7)}
+body.jst-in .wj .jc{color:#a9bcae}
+
+/* passage titles: most carry a plain rule; some a branch winding under the title, some one spray */
+.sec h3{display:block}
+.sec h3 span{position:relative;z-index:1}
+.sec h3.sprayed{display:flex;align-items:center;justify-content:center;gap:12px}
+.sec h3.sprayed::after{display:none}
+.sec h3 .spr{height:52px;width:auto;flex:none;transform:none}
+.sec h3.branched{position:relative;padding-bottom:30px;margin-bottom:6px}
+.sec h3.branched::after{display:none}
+.sec h3 .tb{position:absolute;left:50%;top:-6px;width:330px;height:auto;transform:translateX(-50%);opacity:.95;z-index:0}
+body.small .sec h3 span{display:inline-block;transform:scale(1.9);transform-origin:50% 60%}
+body.small .sec h3 .tb,body.small .sec h3 .spr{opacity:0}
+
+/* art in the empty lanes: smaller object studies, vines that climb beside the words */
+.col.empty img{width:72%;max-width:270px}
+.col.empty.wide img{width:min(100%,900px);max-width:none}
+.col.empty.study.plant img{width:58%;max-width:215px;margin-top:22px}
+.col.empty.study.vine{position:relative;min-height:1px}
+.col.empty.study.vine img{position:absolute;top:70px;width:118px;max-width:none;height:auto;max-height:640px;object-fit:contain;margin:0}
+.col.empty.study.vine.l img{left:6px}
+.col.empty.study.vine.r img{right:6px}
+img.curl{display:block;height:auto;margin:22px 0 0 14px;opacity:.95}
+
+/* timeline */
+.tl-part{position:absolute;top:0;bottom:-1px;border-left:1px solid var(--gold-soft);border-bottom:2px solid transparent;overflow:visible;text-align:center}
+.tl-part:first-child{border-left:0}
+.tl-name{border:0;background:none;cursor:pointer;padding:6px 4px 0;font:10px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#9a9086;white-space:nowrap}
+.tl-name.tight{visibility:hidden;pointer-events:none}
+.tl-name:hover,.tl-part.on .tl-name{color:var(--green)}
+.tl-part.on .tl-name.tight{visibility:visible;position:relative;z-index:2;background:var(--paper);padding:6px 8px 0}
+#tlTip i{font:600 9.5px var(--sans);font-style:normal;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-right:8px}
+
+/* menus: a fixed heading and close, the list scrolls underneath */
+.menu{padding:0;overflow:hidden;display:none;flex-direction:column}
+.menu.on{display:flex}
+.menu .mh{display:flex;align-items:center;padding:14px 20px 8px;flex:none}
+.menu .mh h4{margin:0;font:normal 22px var(--serif);color:var(--green)}
+.menu .mh .x{margin-left:auto;border:0;background:none;font-size:22px;color:#b5ab9a;cursor:pointer;position:static}
+.menu .mb{padding:6px 20px 18px;overflow-y:auto;min-height:0}
+#markMenu .mb{padding-top:16px}
+#readPanel{padding:0}
+#readPanel .mh{padding:20px 34px 6px}#readPanel .mh h4{font-size:28px}
+#readPanel .mb{padding:4px 34px 28px}
+#readPanel .lead{text-align:left;margin:0 0 14px;max-width:none}
+.rd{display:grid;grid-template-columns:150px 1fr;column-gap:18px}
+.rd .wk{grid-row:auto;grid-column:1}
+.rd .rb{grid-column:2;min-width:0}
+.rd .rb b{display:block;font:normal 21px var(--serif);color:var(--green);cursor:pointer}
+#tlPanel h5 a{cursor:pointer}
+.menu .row a i{font-style:italic}
+#jumpOut a em{font:600 9px var(--sans);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+/* bubbles */
+.pop{box-shadow:0 10px 34px rgba(60,45,15,.14),0 0 0 1px rgba(176,135,47,.16)}
+.pop.side::before{display:none}
+#selbar span{color:#fff;font:italic 14.5px var(--serif);padding:5px 12px}
+.leaf{margin:0 2px 0 3px;opacity:.9}
+.leaf + .leaf{margin-left:0}
+
+/* keyboard focus */
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2px}
+.titlepage .kick{margin-top:14px}
+.sec h3.branched{padding-bottom:52px;margin-bottom:8px}
+.sec h3 .tb{top:2px;width:auto;height:74px;max-width:420px;object-fit:contain}
